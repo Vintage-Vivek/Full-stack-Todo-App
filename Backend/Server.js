@@ -5,7 +5,7 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }));
 app.use(express.json());
 
 const routes = require('./routes/routes.js');
@@ -25,6 +25,8 @@ mongoose
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Listening at ${PORT}...`));
+app.use((req, res) => {
+    res.status(404).send({ error: "Route not found" });
+});
 
-//  nothing changed
+app.listen(PORT, () => console.log(`Listening at ${PORT}...`));
