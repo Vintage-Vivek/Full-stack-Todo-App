@@ -1,7 +1,7 @@
 const inputText = document.querySelector(".inputText");
 const TodoApp = document.querySelector(".TodoApp");
 
-const serverUrl = serverUrl;
+const serverUrl = process.env.serverUrl;
 const TodoCreateAPI = `${serverUrl}/api/v1/save`;
 const GetTodoAPI = `${serverUrl}/api/v1/get`;
 const DeleteTodoAPI = `${serverUrl}/api/v1/delete`;
@@ -32,6 +32,8 @@ async function showTodo() {
         console.error("Error fetching tasks:", err);
     }
 }
+
+showTodo();
 
 async function deleteTodo(id) {
     try {
@@ -72,4 +74,4 @@ function showTodoData(data) {
     });
 }
 
-showTodo();
+
