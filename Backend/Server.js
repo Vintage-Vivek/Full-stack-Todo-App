@@ -11,6 +11,13 @@ app.use(express.json());
 const routes = require('./routes/routes.js');
 app.use('/api/v1', routes);
 
+app.get('/',(req,res)=>{
+    res.send({
+        activeStatus:true,
+        error:false,
+    })
+})
+
 mongoose
     .connect(process.env.mongodbUrl, {
         useNewUrlParser: true,
