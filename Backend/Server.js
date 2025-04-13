@@ -10,6 +10,7 @@ app.use(cors({ origin: "https://full-stack-to-do-vivek.netlify.app"}));
 app.options("*", cors());
 app.use(express.json());
 
+
 const routes = require('./routes/routes.js');
 app.use('/api/v1', routes);
 
