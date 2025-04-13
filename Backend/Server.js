@@ -5,9 +5,8 @@ const cors = require('cors');
 
 const app = express();
 
-// app.use(cors({ origin: process.env.CORS_ORIGIN || "https://full-stack-to-do-frontend.netlify.app/api/v1" || '*' }));
-app.use(cors({ origin: "https://full-stack-to-do-vivek.netlify.app"}));
-app.options("*", cors());
+app.use(cors({ origin: ""}));
+app.options("", cors());
 app.use(express.json());
 
 
