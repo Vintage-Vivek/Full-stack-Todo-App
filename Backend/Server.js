@@ -19,10 +19,7 @@ app.get('/',(req,res)=>{
 })
 
 mongoose
-    .connect(process.env.mongodbUrl, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
+    .connect(process.env.mongodbUrl)
     .then(() => console.log("MongoDB connected"))
     .catch((err) => console.error("MongoDB connection error:", err));
 
