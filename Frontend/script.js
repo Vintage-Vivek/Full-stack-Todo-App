@@ -1,7 +1,7 @@
 const inputText = document.querySelector(".inputText");
 const TodoApp = document.querySelector(".TodoApp");
 
-const serverUrl = process.env.serverUrl;
+const serverUrl = "https://full-stack-todo-app-smoky.vercel.app/";
 const TodoCreateAPI = `${serverUrl}/api/v1/save`;
 const GetTodoAPI = `${serverUrl}/api/v1/get`;
 const DeleteTodoAPI = `${serverUrl}/api/v1/delete`;
