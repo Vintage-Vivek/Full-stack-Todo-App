@@ -5,7 +5,7 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(cors({ origin: process.env.CORS_ORIGIN || '*' || "https://full-stack-todo-app-smoky.vercel.app/"}));
+app.use(cors({ origin: process.env.CORS_ORIGIN || "https://full-stack-to-do-frontend.netlify.app" }));
 app.use(express.json());
 
 const routes = require('./routes/routes.js');
