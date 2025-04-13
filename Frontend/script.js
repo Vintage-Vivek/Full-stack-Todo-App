@@ -8,70 +8,82 @@ const DeleteTodoAPI = `${serverUrl}/api/v1/delete`;
 
 async function addList() {
     try {
-        const inputValue = inputText.value;
-        const inputObj = { toDo: inputValue };
-
-        await fetch(TodoCreateAPI, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(inputObj),
-        });
-
-        window.location.reload();
+      console.log("hi")
+      let inputValue = inputText.value;
+      let inputObj = { toDo: inputValue };
+  
+      const response = await fetch(TodoCreateAPI, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(inputObj),
+      });
+  
+      const data = await response.json();
+      console.log(data);
+      window.location.reload();
     } catch (err) {
-        console.error("Error adding task:", err);
+      console.log(err);
     }
-}
-
-async function showTodo() {
+  }
+  
+  async function showTodo() {
     try {
-        const response = await fetch(GetTodoAPI);
-        const data = await response.json();
-        showTodoData(data);
+      const response = await fetch(GetTodoAPI);
+      const data = await response.json();
+      console.log(data);
+      showTodoData(data);
     } catch (err) {
-        console.error("Error fetching tasks:", err);
+      console.log(err);
     }
-}
-
-showTodo();
-
-async function deleteTodo(id) {
+  }
+  
+  showTodo();
+  
+  
+  // -----------------------------------------------------------------------------by gpt new -----------------------------------------------------------
+  async function deleteTodo(id) {
     try {
-        await fetch(`${DeleteTodoAPI}/${id}`, { method: "DELETE" });
-        document.getElementById(id).remove();
+      const response = await fetch(`${DeleteTodoAPI}/${id}`, { method: 'DELETE' });
+      const data = await response.json();
+      console.log(data);
+  
+      // Remove the deleted task from the DOM
+      document.getElementById(id).remove();
     } catch (err) {
-        console.error("Error deleting task:", err);
+      console.log(err);
     }
-}
-
-function showTodoData(data) {
+  }
+  
+  
+  function showTodoData(data) {
     data.forEach((element) => {
-        const listParent = document.createElement("div");
-        listParent.id = element._id;
-
-        const listText = document.createElement("p");
-        const button = document.createElement("button");
-
-        listText.textContent = element.toDo;
-        button.textContent = "Delete";
-
-        listParent.appendChild(listText);
-        listParent.appendChild(button);
-        TodoApp.appendChild(listParent);
-
-        listParent.classList.add("listParent");
-        listText.classList.add("listText");
-        button.classList.add("deleteBtn");
-
-        listParent.addEventListener("click", () => {
-            listText.classList.toggle("completed");
-        });
-
-        button.addEventListener("click", (event) => {
-            event.stopPropagation();
-            deleteTodo(element._id);
-        });
+      const listParent = document.createElement("div");
+      listParent.id = element._id;  // Set the id for the element
+  
+      const listText = document.createElement("p");
+      const button = document.createElement("button");
+  
+      listText.textContent = element.toDo;
+      button.textContent = "Delete";
+  
+      listParent.appendChild(listText);
+      listParent.appendChild(button);
+      TodoApp.appendChild(listParent);
+  
+      listParent.classList.add('listParent');
+      listText.classList.add('listText');
+      button.classList.add('deleteBtn');
+  
+      listParent.addEventListener('click', () => {
+        listText.classList.toggle('completed');
+      });
+  
+      button.addEventListener('click', (event) => {
+        event.stopPropagation();  // Prevents the click event from bubbling up
+        deleteTodo(element._id);
+      });
+  
+      console.log(listParent);
     });
-}
-
-
+  }
+  
